@@ -1,12 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-
 import pandas as pd
 import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from splinter import Browser
+import time
+
 
 def init_browser():
     executable_path = {'executable_path': 'C:/Windows/System32/chromedriver'}
@@ -24,20 +22,24 @@ def scrape():
 
     # call on the link
     browser.visit(url)
+   
+    time.sleep(5)
 
     html = browser.html
     # Parse HTML with Beautiful Soup
     soup = BeautifulSoup(html, 'html.parser')
 
+    time.sleep(5)
+
     # save list into variable
-    li = soup.find("ul.item_list li.slide")
+    li = soup.select_one("ul.item_list li.slide")
 
     # use inspect & print all paragraph texts
-    title_news = li.find('div', class_='content_title').text()
+    title_news = li.find('div', class_='content_title').get_text()
     print(title_news)
 
     # use inspect & print all paragraph texts
-    paragraph = li.find('div', class_='article_teaser_body').text()
+    paragraph = li.find('div', class_='article_teaser_body').get_text()
     print(paragraph)
 
     #Mars Featured Image
@@ -45,7 +47,6 @@ def scrape():
     # visit image URL
     browser.visit(url_image)
 
-    import time
     time.sleep(5)
 
     # click on full featured image
@@ -74,17 +75,19 @@ def scrape():
     # visit the URL
     browser.visit(url_twitter)
 
+    time.sleep(10)
+
     # save HTML into variable & parse
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
-    content = soup.find_all('div',
-        class_ = 'css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0')
+    time.sleep(10)
+
+    content = soup.find_all('div', class_ = 'css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0')
 
     mars_tweet = content[0]
-
-    mars_weather = mars_tweet.find('span',
-        class_ = 'css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0').text
+   
+    mars_weather = mars_tweet.find('span', class_ = 'css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0').text
     print(mars_weather)
 
     # Mars Facts
@@ -95,6 +98,8 @@ def scrape():
     # read webpage into tables with Pandas
     tables = pd.read_html(url_facts)
     tables
+
+    time.sleep(5)
 
     type(tables)
 
@@ -136,13 +141,13 @@ def scrape():
         # save image URL
         image_url = root_URL + soup.find('img', class_='wide-image')['src']
         # append the dictionary
-        hemi_links.append({"Title": title, "Image_URL": image_url})
+        hemi_links.append({"Title": title_img, "Image_URL": image_url})
 
     mars_scrape = {
         "News_Title": title_news,
         "News_Content": paragraph,
         "Mars_Featured_Image": featured_img,
-        "Mars_Weather_Data": tweets_list,
+        "Mars_Weather_Data": mars_weather,
         "Mars_Facts": html_table,
         "Mars_Hemisphere_Images": hemi_links
             }
