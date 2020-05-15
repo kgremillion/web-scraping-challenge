@@ -158,4 +158,4 @@ def scrape():
 
 if __name__ == "__main__":
     print("Loading....")    
-    scrape()
+    print(scrape())
