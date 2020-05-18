@@ -1,8 +1,8 @@
 # Web Scraping Goes On A Mission to Mars
 
-*Mission Objective: Scrape the internet to pull information on Mars & compile data then create a webpage that shows the Mars data to the rest of the world*
+*__Mission Objective__: Scrape the internet to pull information on Mars & compile data then create a webpage that shows the Mars data to the rest of the world*
 
-*Equipment Used: Pandas, Flask, Jupyter Notebook, BeatifulSoup, Requests/Splinter, PyMongo
+*__Equipment Used__: Pandas, Flask, Jupyter Notebook, BeatifulSoup, Requests/Splinter, PyMongo*
 
 ## Web Scraping
 This repo shows how to scrape the web for data on Mars include:
