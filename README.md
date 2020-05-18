@@ -20,4 +20,4 @@ This repo shows how to publish the information into a dynamic website:
 * Use HTML & CSS to create a user-friendly website that displays the data
 
 ### Website Preview
-![Website Screensht 1!](/Screenshots/web_image_1.png)
+![Website Screensht 1!](/Missions_To_Mars/screenshots/web_image_1.png)
